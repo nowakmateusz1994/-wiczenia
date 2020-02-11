@@ -26,12 +26,14 @@ index = 0;
 
 
 dots = document.querySelector('div.dots');
+dotArr
 createDots = function () {
     for (let i = 0; i < slideArr.length; i++) {
         let dot = document.createElement('div');
         dot.classList.add('dot');
-        dot.id = 'slide' + i
+        dot.id =  i;
         dots.appendChild(dot);
+        dotArr.push(dot);
     }
 }
 
