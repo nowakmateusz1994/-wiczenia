@@ -103,3 +103,7 @@
 .dot:hover{
     background: white;
 }
+
+.dot.active{
+    background: white;
+}

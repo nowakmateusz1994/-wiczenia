@@ -16,7 +16,7 @@ slideArr = [
     }];
 
 slideIndex = 0;
-
+let = autoPlay = [];
 slideTitle = document.querySelector('div.slideTitle');
 slideDescription = document.querySelector('div.slideDescription');
 slide = document.querySelector('div.slide');
@@ -26,7 +26,7 @@ index = 0;
 
 
 dots = document.querySelector('div.dots');
-dotArr
+let dotArr = [];
 createDots = function () {
     for (let i = 0; i < slideArr.length; i++) {
         let dot = document.createElement('div');
@@ -37,7 +37,10 @@ createDots = function () {
     }
 }
 
+
+
 createDots();
+
 
 changeSlide = () => {
     slideTitle.innerText = "";
@@ -48,11 +51,40 @@ changeSlide = () => {
         slideTitle.innerText = slideArr[index].title;
         slideDescription.innerText = slideArr[index].description;
         slide.style.opacity = 1;
+        wichDot();
     }, 100);
+
+autoPlay = setTimeout(() => {
+   if(index === slideArr.length -1){
+       index = 0
+   } else{
+       index++
+   }
+   changeSlide();
+}, 3000);
+
 
 }
 
+
+
+
+let wichDot = () =>  {
+    dotArr.forEach((dot,i) =>{
+        dot.classList.remove('active');
+        dot.addEventListener('click', ()=>{
+            clearTimeout(autoPlay);
+            index = i;
+            changeSlide();
+        });
+    });
+    dotArr[index].classList.add('active');
+}
+
+wichDot();
+
 next.addEventListener('click', function () {
+    clearTimeout(autoPlay);
     if (index === slideArr.length - 1) {
         index = 0;
     } else {
@@ -62,6 +94,7 @@ next.addEventListener('click', function () {
 })
 
 prev.addEventListener('click', function () {
+    clearTimeout(autoPlay);
     if (index === 0) {
         index = slideArr.length - 1;
     } else {
@@ -69,3 +102,5 @@ prev.addEventListener('click', function () {
     }
     changeSlide();
 })
+
+changeSlide();
